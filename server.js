@@ -39,14 +39,15 @@ app.get('/api/users', async (req, res) => {
 });
 
 app.post('/api/users', async (req, res) => {
-    const { name, email } = req.body;
+    const { Name, Email } = req.body;
+    console.log(req.body);
     try {
         const pool = await sql.connect(dbConfig);
         const result = await pool.request()
-            .input('Name', sql.NVarChar, name)
-            .input('Email', sql.NVarChar, email)
+            .input('Name', sql.NVarChar, Name)
+            .input('Email', sql.NVarChar, Email)
             .query('INSERT INTO Users (Name, Email) VALUES (@Name, @Email); SELECT SCOPE_IDENTITY() AS Id');
-        res.json({ id: result.recordset[0].Id, name, email });
+        res.json({ id: result.recordset[0].Id, Name, Email });
     } catch (err) {
         console.error(err);
         res.status(500).send('Error adding user');
