@@ -13,8 +13,10 @@ Ensure you have the following installed on your machine:
 
 ## Project Structure
 
-```
 project/
+│
+├── config/
+│   ├── dbConfig.js
 │
 ├── controllers/
 │   ├── userController.js
@@ -24,9 +26,6 @@ project/
 │   ├── userRoutes.js
 │   ├── productRoutes.js
 │
-├── config/
-│   ├── dbConfig.js
-│
 ├── migrations/
 │   ├── <timestamp>_create_users_table.js
 │   ├── <timestamp>_create_products_table.js
@@ -35,11 +34,22 @@ project/
 │   ├── seed_users.js
 │   ├── seed_products.js
 │
+├── src/
+│   ├── components/
+│   │   ├── NavBar.js
+│   │   ├── Users.js
+│   │   ├── UserForm.js
+│   │   ├── Products.js
+│   │   ├── ProductForm.js
+│   ├── App.js
+│   ├── App.css
+│   ├── index.js
+│
 ├── .env
 ├── knexfile.js
 ├── server.js
 └── package.json
-```
+
 
 ## Environment Variables
 
