@@ -1,4 +1,6 @@
-Here's the markdown for the README file:
+Got it! Let's simplify the setup and remove references to Knex and migrations.
+
+Here's the updated README that focuses on setting up the database, creating the tables, seeding values, and running the server using Docker CLI commands:
 
 ```markdown
 # Database Setup with Products and Users
@@ -13,6 +15,7 @@ Ensure you have the following installed on your machine:
 
 ## Project Structure
 
+```
 project/
 │
 ├── config/
@@ -26,14 +29,6 @@ project/
 │   ├── userRoutes.js
 │   ├── productRoutes.js
 │
-├── migrations/
-│   ├── <timestamp>_create_users_table.js
-│   ├── <timestamp>_create_products_table.js
-│
-├── seeds/
-│   ├── seed_users.js
-│   ├── seed_products.js
-│
 ├── src/
 │   ├── components/
 │   │   ├── NavBar.js
@@ -46,10 +41,9 @@ project/
 │   ├── index.js
 │
 ├── .env
-├── knexfile.js
 ├── server.js
 └── package.json
-
+```
 
 ## Environment Variables
 
@@ -99,88 +93,46 @@ module.exports = {
 };
 ```
 
-## Migrations
+## Creating Tables
+
+You can use the following SQL scripts to create the `Users` and `Products` tables:
 
 ### Create Users Table
 
-**migrations/<timestamp>_create_users_table.js**:
-
-```javascript
-exports.up = function(knex) {
-    return knex.schema.createTable('Users', function(table) {
-        table.increments('Id').primary();
-        table.string('Name', 255).notNullable();
-        table.string('Email', 255).notNullable();
-    });
-};
-
-exports.down = function(knex) {
-    return knex.schema.dropTable('Users');
-};
+```sql
+CREATE TABLE Users (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(255) NOT NULL,
+    Email NVARCHAR(255) NOT NULL
+);
 ```
 
 ### Create Products Table
 
-**migrations/<timestamp>_create_products_table.js**:
-
-```javascript
-exports.up = function(knex) {
-    return knex.schema.createTable('Products', function(table) {
-        table.increments('Id').primary();
-        table.string('Name', 255).notNullable();
-        table.decimal('Price', 18, 2).notNullable();
-    });
-};
-
-exports.down = function(knex) {
-    return knex.schema.dropTable('Products');
-};
+```sql
+CREATE TABLE Products (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(255) NOT NULL,
+    Price DECIMAL(18, 2) NOT NULL
+);
 ```
 
-## Seeding
+## Seeding Data
+
+You can use the following SQL scripts to seed initial data into the `Users` and `Products` tables:
 
 ### Seed Users Data
 
-**seeds/seed_users.js**:
-
-```javascript
-exports.seed = function(knex) {
-    return knex('Users').del()
-        .then(function () {
-            return knex('Users').insert([
-                { Name: 'John Doe', Email: 'john@example.com' },
-                { Name: 'Jane Smith', Email: 'jane@example.com' },
-            ]);
-        });
-};
+```sql
+INSERT INTO Users (Name, Email) VALUES ('John Doe', 'john@example.com');
+INSERT INTO Users (Name, Email) VALUES ('Jane Smith', 'jane@example.com');
 ```
 
 ### Seed Products Data
 
-**seeds/seed_products.js**:
-
-```javascript
-exports.seed = function(knex) {
-    return knex('Products').del()
-        .then(function () {
-            return knex('Products').insert([
-                { Name: 'Product 1', Price: 10.00 },
-                { Name: 'Product 2', Price: 20.00 },
-            ]);
-        });
-};
-```
-
-## Running Migrations and Seeds
-
-To run the migrations and seeds, use the following commands:
-
-```bash
-# Run migrations
-npx knex migrate:latest
-
-# Run seeds
-npx knex seed:run
+```sql
+INSERT INTO Products (Name, Price) VALUES ('Product 1', 10.00);
+INSERT INTO Products (Name, Price) VALUES ('Product 2', 20.00);
 ```
 
 ## Docker CLI Commands
@@ -226,9 +178,9 @@ Your server should now be running on `http://localhost:5000`.
 
 ## Conclusion
 
-This README provides a comprehensive guide to setting up the database, running migrations and seeds, and using Docker CLI commands to run the setup. If you encounter any issues, feel free to ask for help!
+This README provides a comprehensive guide to setting up the database, creating tables, seeding data, and using Docker CLI commands to run the setup. If you encounter any issues, feel free to ask for help!
 
 Happy coding! 😊
 ```
 
-This should cover everything you need for setting up the database, running migrations and seeds, and using Docker CLI commands. Let me know if you need any more details or have other questions! 😊
+This README provides instructions for manually creating tables and seeding data without using Knex or migrations. If you have any further questions or need additional modifications, feel free to ask! 😊
