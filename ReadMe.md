@@ -1,8 +1,4 @@
-Got it! Let's simplify the setup and remove references to Knex and migrations.
 
-Here's the updated README that focuses on setting up the database, creating the tables, seeding values, and running the server using Docker CLI commands:
-
-```markdown
 # Database Setup with Products and Users
 
 This README provides instructions for setting up the database with `Users` and `Products` tables, and running the setup using Docker CLI commands.
